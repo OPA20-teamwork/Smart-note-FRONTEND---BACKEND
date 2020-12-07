@@ -1,0 +1,55 @@
+/* Tar bort all standard styling från HTML filen */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* lägger till bakgrunds färg och gör så att sidan håller 100% av webbläsarens storlek  */
+body{
+    background-color: aqua;
+    min-height: 100vh;
+}
+
+
+/* dection för form och knapp styling */
+header, form{
+    align-items: center;
+    display: flex;
+    min-height: 15vh;
+    justify-content: center;
+}
+
+form input, form button{
+    padding: 0.4rem;
+    border: none;
+    font-size: 1.6rem;
+    background: white;
+}
+
+form button{
+    color: teal;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+form button:hover{
+    background: teal;
+    color: white;
+}
+/* dection för form och knapp styling */
+
+.input-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-list{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+}
+
