@@ -1,5 +1,7 @@
 let List = [];
 
+getNotes();
+
 function addNote() {
     event.preventDefault();
     let input = $(".input").val();
@@ -41,4 +43,8 @@ function deleteNote(){
     }
 }
 
-
+async function getNotes(){
+    let result = await fetch("/rest/notes");
+    List = await result.json();
+    renderList();
+}

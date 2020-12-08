@@ -1,10 +1,12 @@
 package com.company;
 
+import Files.Note;
 import express.Express;
 import express.middleware.Middleware;
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.List;
 
 public class Main {
 
@@ -12,12 +14,11 @@ public class Main {
 	Database db = new Database();
 	Express app = new Express();
 
+	    app.get("/rest/notes", (request, response) -> {
+            List<Note> notes = db.getNotes();
+            response.json(notes);
+        });
 
-
-
-
-
-        // middleware
         try {
             app.use(Middleware.statics(Paths.get("src/Frontend").toString()));
         } catch (IOException e) {
