@@ -25,7 +25,7 @@ function renderList() {
     
     $(".input-list").empty();
     for(let i = 0 ; i< List.length ; i++){
-    $(".input-list").append(`<li> ${List[i].text}<span class="deleteB">X</span></li>`);
+    $(".input-list").append(`<li> ${List[i].text}<button class="deleteB">X</button></li>`);
     }
     deleteNote();
 }
