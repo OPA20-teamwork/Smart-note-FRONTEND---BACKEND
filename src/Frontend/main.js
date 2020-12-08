@@ -42,3 +42,8 @@ function deleteNote(){
 }
 
 
+//function addImage(){}
+
+
+//function addFile(){}
+

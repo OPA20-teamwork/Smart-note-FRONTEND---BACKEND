@@ -11,15 +11,15 @@
     <header>
         <a href="index.html"><h1>Smart Notes</h1></a>
     </header>
+    <h2>Här samlar vi dina favoritbilder</h2>
 
-    <form>
-        <input type="text" placeholder="Lägg till en bild..." class="input"/>
-        <button class="input-button" type="submit" onclick="addNote()">
-            <i class="fas fa-plus-square">+</i>
+    <form action="/action_page.php">
+        <input type="file" class= "file-picker" id="myPicture">
+        <button class="input-button" type="submit" onclick="addPicture()">
+            <i>+</i>
         </button>
-
     </form>
-    
+ 
     <ul class="input-list">
     </ul>
 
