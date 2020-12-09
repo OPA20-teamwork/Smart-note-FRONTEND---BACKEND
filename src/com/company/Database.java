@@ -32,4 +32,16 @@ public class Database {
         }
             return notes;
     }
+
+    public void createNote(Note note){
+
+        try {
+            PreparedStatement statement = conn.prepareStatement("INSERT INTO notes (text) VALUES(?)");
+            statement.setString(1, note.getText());
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
 }

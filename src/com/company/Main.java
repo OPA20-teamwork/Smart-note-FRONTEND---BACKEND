@@ -19,6 +19,13 @@ public class Main {
             response.json(notes);
         });
 
+	    app.post("/rest/notes", (request, response) -> {
+	        Note note = (Note)request.getBody(Note.class);
+	        db.createNote(note);
+            System.out.println(note.toString() + "created");
+            response.send("post Ok");
+        });
+
         try {
             app.use(Middleware.statics(Paths.get("src/Frontend").toString()));
         } catch (IOException e) {

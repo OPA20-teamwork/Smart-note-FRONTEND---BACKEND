@@ -48,3 +48,13 @@ async function getNotes(){
     List = await result.json();
     renderList();
 }
+
+async function createNote(note){
+    let result = await fetch("/rest/notes",{
+        method: "POST",
+        body: JSON.stringify(note)
+    });
+
+    console.log(await result.text());
+}
+
