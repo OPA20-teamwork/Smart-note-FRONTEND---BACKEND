@@ -26,6 +26,13 @@ public class Main {
             response.send("post Ok");
         });
 
+	    app.delete("/rest/notes/:id", (request, response) -> {
+	        Note note = (Note)request.getBody(Note.class);
+	        db.deleteNote(note);
+            System.out.println(note.toString() + "deleted");
+            response.send("delete Ok");
+        });
+
         try {
             app.use(Middleware.statics(Paths.get("src/Frontend").toString()));
         } catch (IOException e) {
