@@ -1,5 +1,7 @@
 let List = [];
 
+getNotes();
+
 function addNote() {
     event.preventDefault();
     let input = $(".input").val();
@@ -11,6 +13,8 @@ function addNote() {
         }
 
         List.push(note);
+        createNote(note);
+        getNotes();
         console.log(List);
     }
     //Updatera denna biten!
@@ -18,7 +22,7 @@ function addNote() {
         alert("Input tom");
     }
     $(".input").val("");
-    renderList();
+
 }
 
 function renderList() {
@@ -35,15 +39,34 @@ function deleteNote(){
     let deleteBtns = $(".deleteB");
     for(let i = 0 ;  i < deleteBtns.length ; i++){
         $(deleteBtns[i]).click(function(){
+            deleteNoteDB(List[i]);
             List.splice(i,1);
             $(this).parent().remove();
+            getNotes();
         })
     }
 }
 
+async function getNotes(){
+    let result = await fetch("/rest/notes");
+    List = await result.json();
+    renderList();
+}
 
-//function addImage(){}
+async function createNote(note){
+    let result = await fetch("/rest/notes",{
+        method: "POST",
+        body: JSON.stringify(note)
+    });
 
+    console.log(await result.text());
+}
 
-//function addFile(){}
-
+async function deleteNoteDB(note){
+    let result = await fetch("/rest/notes/id",{
+        method: "DELETE",
+        body: JSON.stringify(note)
+    })
+    
+    console.log(await result.text());
+}
