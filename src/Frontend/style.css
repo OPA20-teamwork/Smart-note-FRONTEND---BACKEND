@@ -18,6 +18,7 @@ header, form{
     display: flex;
     min-height: 15vh;
     justify-content: center;
+    font-size: 25;
 }
 
 form input, form button{
@@ -27,6 +28,7 @@ form input, form button{
     background: white;
 }
 
+/* Add button */
 form button{
     color: teal;
     background: white;
@@ -38,6 +40,7 @@ form button:hover{
     background: teal;
     color: white;
 }
+
 /* dection för form och knapp styling */
 
 .input-container{
@@ -51,5 +54,63 @@ form button:hover{
     align-items: center;
     justify-content: center;
     list-style: none;
+}
+
+/* Delar in startsidan i tre lika stora delar (bilder, filer anteckningar)*/
+.column{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    width: 33.33%;
+}
+
+/* Inte helt säker på vad denna gör än*/
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  /* Ändrar Alla knappar på startsidan */
+.main-btns{
+    background-color:teal;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+}
+.main-btns:hover{
+    background-color: rgb(2, 85, 85);
+}
+
+#pictures-btn{
+    text-decoration: none;
+    color: thistle;
+}
+
+
+#files-btn{
+    text-decoration: none;
+    color: thistle;
+}
+
+
+#notes-btn{
+    text-decoration: none;
+    color: thistle;
+}
+
+.deleteB{
+    color: teal;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.deleteB:hover{
+    background: teal;
+    color: white;
 }
 
