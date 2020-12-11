@@ -1,4 +1,12 @@
 let root = document.getElementById("root");
+let fileInput = document.createElement("input");
+fileInput.setAttribute("type", "file");
+fileInput.className = "imageInput";
+
+let fileButton = document.createElement("input");
+fileButton.setAttribute("type", "submit");
+fileButton.className = "fileButton";
+
 
 
 class todoList{
@@ -6,7 +14,9 @@ class todoList{
 
         this.place = place;
         this.title = title;
+        this.fileInput = fileInput;
         this.cardArray = [];
+        
 
         this.render();
     }
@@ -14,11 +24,13 @@ class todoList{
     addToDo(){
         let text = this.input.value;
         this.cardArray.push(new Card(text, this.div, this));
+        
     }
 
     render(){
         this.createToDoListElement();
         this.place.append(this.todoListElement);
+        
     }
 
     createToDoListElement(){
@@ -46,6 +58,7 @@ class todoList{
         this.todoListElement.append(this.h2);
         this.todoListElement.append(this.input);
         this.todoListElement.append(this.button);
+        this.todoListElement.append(this.button);
         this.todoListElement.append(this.div);
         this.todoListElement.classList.add("todoList");
     }
@@ -60,7 +73,8 @@ class Card{
         this.state = {
             text: text,
             description: "klicka för att lägga till en beskrivning...",
-            comments: []
+            comments: [],
+            files: []
             
         }
         this.render();
@@ -77,6 +91,9 @@ class Card{
 
         this.p = document.createElement('p');
         this.p.innerText = this.state.text;
+        // this.img = document.createElement('input');
+        // this.img = document.createElement('img');
+        // this.img = document.createElement('picture');
 
         this.deleteButton = document.createElement('button');
         this.deleteButton.innerText = "X";
@@ -86,6 +103,7 @@ class Card{
 
         this.card.append(this.p);
         this.card.append(this.deleteButton);
+        this.card.append(fileButton);
         
         this.place.append(this.card);
     }
@@ -106,6 +124,7 @@ class Card{
         this.commentsInput = document.createElement("input");
         this.commentsButton = document.createElement('button');
         this.menuComments = document.createElement("div");
+        this.menuFiles = document.createElement("div");
 
 
         //Lägg till class namn
@@ -116,10 +135,13 @@ class Card{
         this.menuComments.className = "menuComments";
         this.commentsInput.className = "commentsInput comment";
         this.commentsButton.className = "commentsButton btn-save";
+        this.menuFiles.className = "menuFiles";
+
 
         //Lägg till placeholder text till kommentarfältet inom varje kort (inner Text)
         this.commentsButton.innerText = "Lägg till";
         this.commentsInput.placeholder = "Skriv en kommentar...";
+        
 
         //Event listeners
         this.menuContainer.addEventListener('click', (e)=>{
@@ -128,6 +150,7 @@ class Card{
                 this.menuContainer.remove();
             }
         });
+
         
         this.commentsButton.addEventListener('click', ()=>{
             if(this.commentsInput.value != ""){
@@ -137,12 +160,24 @@ class Card{
             }
         })
 
+        fileButton.addEventListener('click', ()=>{
+            if(this.fileInput.value != ""){
+            this.state.files.push(this.fileInput.value);
+            this.renderFiles();
+            this.fileInput.value = "";
+            }
+        })
+
         //Append
         this.menu.append(this.menuTitle);
         this.menu.append(this.menuDescription);
         this.menu.append(this.commentsInput);
         this.menu.append(this.commentsButton);
         this.menu.append(this.menuComments);
+        this.menu.append(fileInput);
+        this.menu.append(fileButton);
+        this.menu.append(this.menuFiles);
+        
         this.menuContainer.append(this.menu);
         root.append(this.menuContainer);
 
@@ -150,6 +185,7 @@ class Card{
         this.editableTitle = new EditableText(this.state.text, this.menuTitle, this, "text", "input");
         
         this.renderComments();
+        this.renderFiles();
     }
 
     renderComments(){
@@ -164,6 +200,21 @@ class Card{
             new Comment(comment, this.menuComments, this);
         });
     }
+
+    renderFiles(){
+        let currentFilesDom = Array.from(this.menuFiles.childNodes);
+
+        currentFilesDom.forEach(fileDOM =>{
+            fileDOM.remove();
+        });
+
+        this.state.files.forEach(file =>{
+            new File(file, this.menuFiles, this);
+        });
+
+    }
+
+
 }
 
 class EditableText{
@@ -256,6 +307,23 @@ class Comment{
     }
 }
 
+class File{
+    constructor(file, place, card){
+        this.file = file;
+        this.place = place;
+        this.card = card;
+        this.render();
+    }
+
+    render(){
+        this.div = document.createElement('div');
+        this.div.className = "file";
+        this.div.innerHTML = this.file;
+
+        this.place.append(this.div);
+    }
+}
+
 
 
 
@@ -275,3 +343,4 @@ addTodoListButton.addEventListener('click',()=>{
 let todoList1 = new todoList(root);
 // todoList1.input.value = "Gå med hunden";
 // todoList1.addToDo();
+
