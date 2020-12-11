@@ -13,13 +13,17 @@
     </header>
 <h2>Här samlar vi allt viktigt och oviktigt</h2>
     <form>
-        <input type="text" placeholder="Lägg till en anteckning..." class="input">
+        <input type="text" placeholder="Titel...." class="input">
+        <input type="textarea" placeholder="Lägg till en anteckning..." class="input">
+        <input type="file" accept="image/*" placeholder="Välj din bild...">
         <button class="input-button" type="submit" onclick="addNote()">
+        
             <i>+</i>
         </button>
         
     </form>
     
+        <!-- Lägg till id för varje ul lista i varje page, just nu skrivs noteringarna ut i alla sidor. därför behöver vi ändra id och se till att varje upladdning fil/bild/notering hamnar där den ska vara-->
     <ul class="input-list">
         
     </ul>

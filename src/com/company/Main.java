@@ -33,6 +33,13 @@ public class Main {
             response.send("delete Ok");
         });
 
+	    app.put("/rest/notes/:id", (request, response) -> {
+	        Note note = (Note) request.getBody(Note.class);
+	        db.updateNoteById(note);
+            System.out.println(note.toString() + "updated");
+            response.send("Note was updated succesfully");
+        });
+
         try {
             app.use(Middleware.statics(Paths.get("src/Frontend").toString()));
         } catch (IOException e) {

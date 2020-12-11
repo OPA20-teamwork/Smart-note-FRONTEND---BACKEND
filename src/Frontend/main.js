@@ -25,6 +25,8 @@ function addNote() {
 
 }
 
+
+
 function renderList() {
     
     $(".input-list").empty();
