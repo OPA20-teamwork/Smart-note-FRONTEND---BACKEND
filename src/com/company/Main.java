@@ -19,6 +19,7 @@ public class Main {
             response.json(notes);
         });
 
+	    //Updaatera följande så att det ser mer ut som Johans POST, Se dock till att den kan hantera felr filer inom samma post
 	    app.post("/rest/notes", (request, response) -> {
 	        Note note = (Note)request.getBody(Note.class);
 	        db.createNote(note);
