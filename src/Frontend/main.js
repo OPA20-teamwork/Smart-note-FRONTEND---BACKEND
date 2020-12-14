@@ -6,26 +6,25 @@ function addNote() {
     event.preventDefault();
     let input = $("#notes-input").val();
     let titleInput = $("#title-input").val();
-
+    
     if(input.length > 0 ){
         let note = {
             title: titleInput,
             text: input,
-
             
         }
-
+        
         List.push(note);
         createNote(note);
-        getNotes();
         console.log(List);
+        getNotes();
     }
     //Updatera denna biten!
     else{
         alert("Input tom");
     }
     $(".input").val("");
-
+    
 }
 
 
