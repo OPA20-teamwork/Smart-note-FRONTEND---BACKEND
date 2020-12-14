@@ -11,15 +11,16 @@
     <header>
         <a href="index.html"><h1>Smart Notes</h1></a>
     </header>
+    <h2>Här samlar vi dina viktiga filer</h2>
 
     <form>
-        <input type="text" placeholder="Lägg till en fil..." class="input"/>
-        <button class="input-button" type="submit" onclick="addNote()">
+        <input type="file" class= "file-picker" id="myFile">
+        <button class="input-button" type="submit" onclick="addFile()">
             <i>+</i>
         </button>
-
     </form>
-    
+ 
+    <!-- Lägg till id för varje ul lista i varje page, just nu skrivs noteringarna ut i alla sidor. därför behöver vi ändra id och se till att varje upladdning fil/bild/notering hamnar där den ska vara-->
     <ul class="input-list">
     </ul>
 

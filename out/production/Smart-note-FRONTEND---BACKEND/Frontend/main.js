@@ -4,7 +4,7 @@ getNotes();
 
 function addNote() {
     event.preventDefault();
-    let input = $(".input").val();
+    let input = $("#notes-input").val();
 
     if(input.length > 0){
         let note = {
@@ -25,11 +25,13 @@ function addNote() {
 
 }
 
+
+
 function renderList() {
     
-    $(".input-list").empty();
+    $("#notes-ul").empty();
     for(let i = 0 ; i< List.length ; i++){
-    $(".input-list").append(`<li> ${List[i].text}<button class="deleteB">X</button></li>`);
+    $("notes-ul").append(`<li> ${List[i].text}<button class="deleteB">X</button></li>`);
     }
     deleteNote();
 }
