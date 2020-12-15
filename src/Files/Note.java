@@ -4,17 +4,19 @@ public class Note {
     private int id;
     private String text;
     private int date;
-    private String imagePath;
+    private String imageUrl;
     private String title;
 
     public Note() {
 
     }
 
-    public Note(String text, int date, String imagePath, String title) {
+
+
+    public Note(String text, int date, String imageUrl, String title) {
         this.text = text;
         this.date = date;
-        this.imagePath = imagePath;
+        this.imageUrl = imageUrl;
         this.title = title;
     }
 
@@ -42,12 +44,12 @@ public class Note {
         this.date = date;
     }
 
-    public String getImagePath() {
-        return imagePath;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getTitle() {
@@ -64,7 +66,7 @@ public class Note {
                 "id=" + id +
                 ", text='" + text + '\'' +
                 ", date=" + date +
-                ", imagePath='" + imagePath + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
                 ", title='" + title + '\'' +
                 '}';
     }

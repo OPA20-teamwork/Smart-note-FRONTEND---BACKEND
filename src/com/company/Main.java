@@ -3,6 +3,7 @@ package com.company;
 import Files.Note;
 import express.Express;
 import express.middleware.Middleware;
+import org.apache.commons.fileupload.FileItem;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -17,6 +18,19 @@ public class Main {
 	    app.get("/rest/notes", (request, response) -> {
             List<Note> notes = db.getNotes();
             response.json(notes);
+        });
+
+	    app.post("/api/file-upload", (request, response) -> {
+	        String imageUrl = null;
+
+	        try {
+	            List<FileItem> files = request.getFormData("files");
+	            imageUrl = db.uploadImage(files.get(0));
+            }catch (Exception e){
+	            e.printStackTrace();
+            }
+
+            response.send(imageUrl);
         });
 
 	    //Updaatera följande så att det ser mer ut som Johans POST, Se dock till att den kan hantera felr filer inom samma post

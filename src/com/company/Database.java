@@ -8,7 +8,6 @@ import org.apache.commons.fileupload.FileItem;
 import java.io.FileOutputStream;
 import java.nio.file.Paths;
 import java.sql.*;
-import java.time.Instant;
 import java.util.List;
 
 public class Database {
@@ -40,10 +39,10 @@ public class Database {
     public void createNote(Note note){
 
         try {
-            PreparedStatement statement = conn.prepareStatement("INSERT INTO notes (text, date, imagePath, title) VALUES(?, ?, ?, ?)");
+            PreparedStatement statement = conn.prepareStatement("INSERT INTO notes (text, date, imageUrl, title) VALUES(?, ?, ?, ?)");
             statement.setString(1, note.getText());
             statement.setInt(2, note.getDate());
-            statement.setString(3, note.getImagePath());
+            statement.setString(3, note.getImageUrl());
             statement.setString(4, note.getTitle());
             statement.executeUpdate();
         } catch (SQLException throwables) {
@@ -64,10 +63,10 @@ public class Database {
 
     public void updateNoteById(Note note){
         try {
-            PreparedStatement statement = conn.prepareStatement("UPDATE notes SET text = ?, date = ?, imagePath = ?, title = ? WHERE id = ?");
+            PreparedStatement statement = conn.prepareStatement("UPDATE notes SET text = ?, date = ?, imageUrl = ?, title = ? WHERE id = ?");
             statement.setString(1, note.getText());
             statement.setInt(2, note.getDate());
-            statement.setString(3, note.getImagePath());
+            statement.setString(3, note.getImageUrl());
             statement.setString(4, note.getTitle());
             statement.setInt(5, note.getId());
 
@@ -80,15 +79,15 @@ public class Database {
 
 
     public String uploadImage(FileItem image){
-        String imagePath =  "/Uploads/" + image.getName();
+        String imageUrl =  "/Uploads/" + image.getName();
 
-        try (var os = new FileOutputStream(Paths.get("src/Frontend" + imagePath).toString())){
+        try (var os = new FileOutputStream(Paths.get("src/Frontend" + imageUrl).toString())){
             os.write(image.get());
         }catch (Exception e){
             e.printStackTrace();
 
             return null;
         }
-    return imagePath;
+    return imageUrl;
     }
 }
