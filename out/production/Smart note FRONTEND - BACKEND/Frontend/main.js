@@ -3,6 +3,7 @@ let List = [];
 getNotes();
 
 
+//FUNGERAR
 async function createNote(e){
     e.preventDefault();
 
@@ -45,39 +46,7 @@ async function createNote(e){
 }
 
 
-
-
-
-// function addNote() {
-//     event.preventDefault();
-//     let input = $("#notes-input").val();
-//     let titleInput = $("#title-input").val();
-    
-//     if(input.length > 0 ){
-//         let note = {
-//             title: titleInput,
-//             text: input,
-            
-//         }
-        
-//         List.push(note);
-//         createNote(note);
-//         console.log(List);
-//         getNotes();
-//     }
-//     //Updatera denna biten!
-//     else{
-//         alert("Input tom");
-//     }
-//     $(".input").val("");
-    
-// }
-
-
-
-//Visar titel och textarea men ej bild/fil
-
-
+//FUNGERAR
 function renderList() {
     
     $("#notes-ul").empty();
@@ -85,7 +54,7 @@ function renderList() {
     $("#notes-ul").append(`<li>
     <h3>${List[i].title}</h3><br>
     <p>${List[i].text}</p>
-    <img src="${List[i].imageUrl}" alt="uppladdad bild...."><br>
+    <embed src="${List[i].imageUrl}"><br>
     <button class="deleteB">X</button>
     </li><br>`);
     }
@@ -114,14 +83,7 @@ async function getNotes(){
     renderList();
 }
 
-// async function createNote(note){
-//     let result = await fetch("/rest/notes",{
-//         method: "POST",
-//         body: JSON.stringify(note)
-//     });
 
-//     console.log(await result.text());
-// }
 
 
 //FUNGERAR!

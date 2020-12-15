@@ -54,7 +54,7 @@ function renderList() {
     $("#notes-ul").append(`<li>
     <h3>${List[i].title}</h3><br>
     <p>${List[i].text}</p>
-    <img src="${List[i].imageUrl}" alt="uppladdad bild...."><br>
+    <embed src="${List[i].imageUrl}" width="200" height="150"><br>
     <button class="deleteB">X</button>
     </li><br>`);
     }
