@@ -1,5 +1,6 @@
 package com.company;
 
+import Files.File;
 import Files.Note;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import express.utils.Utils;
@@ -14,6 +15,8 @@ public class Database {
     private Connection conn;
 
     public Database(){
+
+        //FUNGERAR
         try {
             conn = DriverManager.getConnection("jdbc:sqlite:SmartNotes.db");
         } catch (SQLException throwables) {
@@ -22,6 +25,34 @@ public class Database {
 
     }
 
+
+    public List<File> getFiles(){
+        List<File> files = null;
+
+        try {
+            PreparedStatement statement = conn.prepareStatement("SELECT * FROM files");
+            ResultSet resultSet = statement.executeQuery();
+            File[] filesFromResultSet = (File[])Utils.readResultSetToObject(resultSet, File[].class);
+            files = List.of(filesFromResultSet);
+        } catch (SQLException | JsonProcessingException throwables) {
+            throwables.printStackTrace();
+        }
+        return files;
+    }
+
+    public void createFile(File file){
+        try {
+            PreparedStatement statement = conn.prepareStatement("INSERT INTO files(id, imageUrl) VALUES(?, ?)");
+            statement.setInt(1, file.getId());
+            statement.setString(2, file.getImageUrl());
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+
+    //FUNGERAR
     public List<Note> getNotes(){
         List<Note> notes = null;
 
@@ -36,6 +67,8 @@ public class Database {
             return notes;
     }
 
+
+    //FUNGERAR
     public void createNote(Note note){
 
         try {
@@ -49,8 +82,13 @@ public class Database {
             throwables.printStackTrace();
         }
 
+
     }
 
+
+
+
+    //FUNGERAR
     public void deleteNote(Note note){
         try {
             PreparedStatement statement = conn.prepareStatement("DELETE FROM notes WHERE id=?");
@@ -61,6 +99,8 @@ public class Database {
         }
     }
 
+
+    //FUNGERAR
     public void updateNoteById(Note note){
         try {
             PreparedStatement statement = conn.prepareStatement("UPDATE notes SET text = ?, date = ?, imageUrl = ?, title = ? WHERE id = ?");
@@ -78,6 +118,7 @@ public class Database {
     }
 
 
+    //FUNGERAR
     public String uploadImage(FileItem image){
         String imageUrl =  "/Uploads/" + image.getName();
 
@@ -89,5 +130,20 @@ public class Database {
             return null;
         }
     return imageUrl;
+    }
+
+
+
+    public String uploadFile(FileItem file){
+        String imageUrl =  "/Uploads/" + file.getName();
+
+        try (var os = new FileOutputStream(Paths.get("src/Frontend" + imageUrl).toString())){
+            os.write(file.get());
+        }catch (Exception e){
+            e.printStackTrace();
+
+            return null;
+        }
+        return imageUrl;
     }
 }

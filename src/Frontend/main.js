@@ -3,6 +3,8 @@ let List = [];
 getNotes();
 
 
+
+
 //FUNGERAR
 async function createNote(e){
     e.preventDefault();
@@ -43,6 +45,8 @@ async function createNote(e){
     console.log("funkar du", note);
     List.push(note);
     renderList();
+
+    
 }
 
 
