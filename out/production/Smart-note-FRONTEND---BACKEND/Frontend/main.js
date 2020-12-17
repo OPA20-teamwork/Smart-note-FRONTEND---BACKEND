@@ -4,40 +4,32 @@ getNotes();
 
 function addNote() {
     event.preventDefault();
-    let input = $("#notes-input").val();
-    let titleInput = $("#title-input").val();
-    
-    if(input.length > 0 ){
+    let input = $(".input").val();
+
+    if(input.length > 0){
         let note = {
-            title: titleInput,
             text: input,
             
         }
-        
+
         List.push(note);
         createNote(note);
-        console.log(List);
         getNotes();
+        console.log(List);
     }
     //Updatera denna biten!
     else{
         alert("Input tom");
     }
     $(".input").val("");
-    
+
 }
-
-
 
 function renderList() {
     
-    $("#notes-ul").empty();
+    $(".input-list").empty();
     for(let i = 0 ; i< List.length ; i++){
-    $("#notes-ul").append(`<li>
-    <h3>${List[i].title}</h3><br>
-    <p>${List[i].text}</p>
-    <button class="deleteB">X</button>
-    </li><br>`);
+    $(".input-list").append(`<li> ${List[i].text}<button class="deleteB">X</button></li>`);
     }
     deleteNote();
 }
@@ -78,5 +70,3 @@ async function deleteNoteDB(note){
     
     console.log(await result.text());
 }
-
-getNotes();
