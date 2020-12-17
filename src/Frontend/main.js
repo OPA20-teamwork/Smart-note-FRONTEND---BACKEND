@@ -6,11 +6,11 @@ function addNote() {
     event.preventDefault();
     let input = $(".input").val();
 
-    if(input.length > 0){
-        let note = {
-            text: input,
-            
-        }
+
+
+//FUNGERAR
+async function createNote(e){
+    e.preventDefault();
 
         List.push(note);
         createNote(note);
@@ -23,6 +23,16 @@ function addNote() {
     }
     $(".input").val("");
 
+    let result = await fetch("/rest/notes", {
+        method: "POST",
+        body: JSON.stringify(note)
+    });
+
+    console.log("funkar du", note);
+    List.push(note);
+    renderList();
+
+    
 }
 
 function renderList() {
