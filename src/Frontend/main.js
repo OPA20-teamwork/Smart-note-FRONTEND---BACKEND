@@ -1,4 +1,5 @@
 let List = [];
+let imagesToRender = [];
 
 getNotes();
 
@@ -24,7 +25,7 @@ async function createNote(e){
     });
 
     // get the uploaded image url from response
-    let imageUrl = await uploadResult.text();
+    imagesToRender.push(await uploadResult.text());
 
     let titleInput = document.querySelector('#title-input');
     let contentInput = document.querySelector('#notes-input');
@@ -34,7 +35,7 @@ async function createNote(e){
     let note = {
         title: titleInput.value,
         text: contentInput.value,
-        imageUrl: imageUrl
+        //imageUrl: imageUrl
     }
 
     let result = await fetch("/rest/notes", {
@@ -51,16 +52,37 @@ async function createNote(e){
 
 
 //FUNGERAR
+// function renderList() {
+    
+//     $("#notes-ul").empty();
+//     for(let i = 0 ; i< List.length ; i++){
+//     $("#notes-ul").append(`<div>
+//     <li>
+//     <h3>${List[i].title}</h3><br>
+//     <p>${List[i].text}</p>
+//     <embed src="${List[i].imageUrl}" width="200" height="150"><br>
+//     <button class="deleteB">X</button>
+//     </li></div><br>`);
+//     }
+//     deleteNote();
+// }
+
+
 function renderList() {
     
     $("#notes-ul").empty();
-    for(let i = 0 ; i< List.length ; i++){
-    $("#notes-ul").append(`<li>
+    for(let i = 0 ; i < List.length ; i++){
+        let string = `<div class="fullNote">
     <h3>${List[i].title}</h3><br>
-    <p>${List[i].text}</p>
-    <embed src="${List[i].imageUrl}" width="200" height="150"><br>
-    <button class="deleteB">X</button>
-    </li><br>`);
+    <p>${List[i].text}</p>`;
+
+    for(let j = 0; j < imagesToRender.length; j++){
+    string += `<embed src="${imagesToRender[j]}" width="200" height="150"><br>`;
+    }
+    string +=
+    `<button class="deleteB">X</button>
+    </div>`;
+    $("#notes-ul").append(string);
     }
     deleteNote();
 }

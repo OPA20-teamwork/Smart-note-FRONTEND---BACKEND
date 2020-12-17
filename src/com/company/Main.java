@@ -44,12 +44,14 @@ public class Main {
                     imageUrl = db.uploadImage(files.get(i));
                     imageUrl = db.uploadFile(files.get(i));
                     System.out.println("bild nr: " + i + imageUrl);
+                    response.send(imageUrl);
+
+                    System.out.println("kommer du fram eller?");
                 }
             }catch (Exception e){
 	            e.printStackTrace();
+	            response.send(imageUrl);
             }
-            response.send(imageUrl);
-            System.out.println("nya git versionen");
         });
 
 

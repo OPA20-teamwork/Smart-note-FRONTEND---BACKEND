@@ -3,6 +3,7 @@ package Files;
 public class File {
     private int id;
     private String imageUrl;
+    private int notesID;
 
     public File() {
     }
@@ -10,6 +11,7 @@ public class File {
     public File(int id, String imageUrl) {
         this.id = id;
         this.imageUrl = imageUrl;
+        this.notesID = notesID;
     }
 
     public int getId() {
@@ -28,11 +30,20 @@ public class File {
         this.imageUrl = imageUrl;
     }
 
+    public int getNotesID() {
+        return notesID;
+    }
+
+    public void setNotesID(int notesID) {
+        this.notesID = notesID;
+    }
+
     @Override
     public String toString() {
         return "File{" +
                 "id=" + id +
                 ", imageUrl='" + imageUrl + '\'' +
+                ", notesID=" + notesID +
                 '}';
     }
 }
