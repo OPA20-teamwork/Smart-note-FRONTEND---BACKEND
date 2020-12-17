@@ -3,26 +3,29 @@ package Files;
 public class Note {
     private int id;
     private String text;
-    private int Date;
+    private int date;
     private String imageUrl;
     private String title;
 
     public Note() {
+
     }
+
+
 
     public Note(String text, int date, String imageUrl, String title) {
         this.text = text;
-        Date = date;
+        this.date = date;
         this.imageUrl = imageUrl;
         this.title = title;
     }
 
-    public int getId() {
-        return id;
+    public Note(String text) {
+        this.text = text;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getId() {
+        return id;
     }
 
     public String getText() {
@@ -34,11 +37,11 @@ public class Note {
     }
 
     public int getDate() {
-        return Date;
+        return date;
     }
 
     public void setDate(int date) {
-        Date = date;
+        this.date = date;
     }
 
     public String getImageUrl() {
@@ -62,7 +65,7 @@ public class Note {
         return "Note{" +
                 "id=" + id +
                 ", text='" + text + '\'' +
-                ", Date=" + Date +
+                ", date=" + date +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", title='" + title + '\'' +
                 '}';

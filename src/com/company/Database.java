@@ -14,7 +14,7 @@ import java.util.List;
 public class Database {
     private Connection conn;
 
-    public Database() {
+    public Database(){
 
         //FUNGERAR
         try {
@@ -26,13 +26,13 @@ public class Database {
     }
 
 
-    public List<File> getFiles() {
+    public List<File> getFiles(){
         List<File> files = null;
 
         try {
             PreparedStatement statement = conn.prepareStatement("SELECT * FROM files");
             ResultSet resultSet = statement.executeQuery();
-            File[] filesFromResultSet = (File[]) Utils.readResultSetToObject(resultSet, File[].class);
+            File[] filesFromResultSet = (File[])Utils.readResultSetToObject(resultSet, File[].class);
             files = List.of(filesFromResultSet);
         } catch (SQLException | JsonProcessingException throwables) {
             throwables.printStackTrace();
@@ -40,7 +40,7 @@ public class Database {
         return files;
     }
 
-    public void createFile(File file) {
+    public void createFile(File file){
         try {
             PreparedStatement statement = conn.prepareStatement("INSERT INTO files(id, imageUrl) VALUES(?, ?)");
             statement.setInt(1, file.getId());
@@ -53,27 +53,30 @@ public class Database {
 
 
     //FUNGERAR
-    public List<Note> getNotes() {
+    public List<Note> getNotes(){
         List<Note> notes = null;
 
         try {
             PreparedStatement statement = conn.prepareStatement("SELECT * FROM notes");
             ResultSet resultSet = statement.executeQuery();
-            Note[] notesFromResultSet = (Note[]) Utils.readResultSetToObject(resultSet, Note[].class);
+            Note[] notesFromResultSet = (Note[])Utils.readResultSetToObject(resultSet, Note[].class);
             notes = List.of(notesFromResultSet);
         } catch (SQLException | JsonProcessingException throwables) {
             throwables.printStackTrace();
         }
-        return notes;
+            return notes;
     }
 
 
     //FUNGERAR
-    public void createNote(Note note) {
+    public void createNote(Note note){
 
         try {
-            PreparedStatement statement = conn.prepareStatement("INSERT INTO notes (text) VALUES(?)");
+            PreparedStatement statement = conn.prepareStatement("INSERT INTO notes (text, date, imageUrl, title) VALUES(?, ?, ?, ?)");
             statement.setString(1, note.getText());
+            statement.setInt(2, note.getDate());
+            statement.setString(3, note.getImageUrl());
+            statement.setString(4, note.getTitle());
             statement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -83,11 +86,13 @@ public class Database {
     }
 
 
+
+
     //FUNGERAR
-    public void deleteNote(Note note) {
+    public void deleteNote(Note note){
         try {
             PreparedStatement statement = conn.prepareStatement("DELETE FROM notes WHERE id=?");
-            statement.setInt(1, note.getId());
+            statement.setInt(1,  note.getId());
             statement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -95,9 +100,8 @@ public class Database {
     }
 
 
-
     //FUNGERAR
-    public void updateNoteById(Note note) {
+    public void updateNoteById(Note note){
         try {
             PreparedStatement statement = conn.prepareStatement("UPDATE notes SET text = ?, date = ?, imageUrl = ?, title = ? WHERE id = ?");
             statement.setString(1, note.getText());
@@ -115,31 +119,31 @@ public class Database {
 
 
     //FUNGERAR
-    public String uploadImage(FileItem image) {
-        String imageUrl = "/Uploads/" + image.getName();
+    public String uploadImage(FileItem image){
+        String imageUrl =  "/Uploads/" + image.getName();
 
-        try (var os = new FileOutputStream(Paths.get("src/Frontend" + imageUrl).toString())) {
+        try (var os = new FileOutputStream(Paths.get("src/Frontend" + imageUrl).toString())){
             os.write(image.get());
-        } catch (Exception e) {
+        }catch (Exception e){
             e.printStackTrace();
 
             return null;
         }
-        return imageUrl;
+    return imageUrl;
     }
 
 
-    public String uploadFile(FileItem file) {
-        String imageUrl = "/Uploads/" + file.getName();
 
-        try (var os = new FileOutputStream(Paths.get("src/Frontend" + imageUrl).toString())) {
+    public String uploadFile(FileItem file){
+        String imageUrl =  "/Uploads/" + file.getName();
+
+        try (var os = new FileOutputStream(Paths.get("src/Frontend" + imageUrl).toString())){
             os.write(file.get());
-        } catch (Exception e) {
+        }catch (Exception e){
             e.printStackTrace();
 
             return null;
         }
         return imageUrl;
     }
-
 }

@@ -11,7 +11,6 @@ body{
     min-height: 100vh;
 }
 
-
 /* dection för form och knapp styling */
 header, form{
     align-items: center;
@@ -19,7 +18,20 @@ header, form{
     min-height: 15vh;
     justify-content: center;
     font-size: 25;
+    margin-bottom: 50px;
+    margin-top: 30px;
 }
+
+/* Utseende på rubrik ovanför inputfält*/
+h2{
+    text-align: center;
+}
+
+/*Tar bort understrykning från länk-knappar*/
+a{
+    text-decoration: none;
+}
+
 
 form input, form button{
     padding: 0.4rem;
@@ -43,12 +55,13 @@ form button:hover{
 
 /* dection för form och knapp styling */
 
-.input-container{
+.input{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center;    
 }
 
+/* Listan som visar alla uppladdade filer + anteckningar*/
 .input-list{
     display: flex;
     align-items: center;
@@ -56,7 +69,7 @@ form button:hover{
     list-style: none;
 }
 
-/* Delar in startsidan i tre lika stora delar (bilder, filer anteckningar)*/
+/* Delar in startsidan i tre delar (bilder, filer anteckningar)*/
 .column{
     display: flex;
     justify-content: center;
@@ -72,7 +85,7 @@ form button:hover{
     clear: both;
   }
 
-  /* Ändrar Alla knappar på startsidan */
+  /* Ändrar knapparna på startsidan */
 .main-btns{
     background-color:teal;
     border: none;
@@ -86,23 +99,21 @@ form button:hover{
     background-color: rgb(2, 85, 85);
 }
 
+
+/* Ändrar utseende på texten i main knapparna*/
 #pictures-btn{
-    text-decoration: none;
     color: thistle;
 }
-
 
 #files-btn{
-    text-decoration: none;
     color: thistle;
 }
-
 
 #notes-btn{
-    text-decoration: none;
     color: thistle;
 }
 
+/*Ändrar delete knappen på uppladdade filer*/
 .deleteB{
     color: teal;
     background: white;
@@ -114,3 +125,15 @@ form button:hover{
     color: white;
 }
 
+/* Ändrar listan på första-sidan*/
+.start-page-list{
+    position: fixed;
+    margin-top: 20%;
+    border-width: 30%;
+    background-color: rgb(152, 247, 237);
+    text-align: center;
+    list-style-type: none;
+}
+.file-picker{
+    font-size: 20.4px;
+}

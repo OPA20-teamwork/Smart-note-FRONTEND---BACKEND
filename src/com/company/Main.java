@@ -49,6 +49,7 @@ public class Main {
 	            e.printStackTrace();
             }
             response.send(imageUrl);
+            System.out.println("nya git versionen");
         });
 
 
