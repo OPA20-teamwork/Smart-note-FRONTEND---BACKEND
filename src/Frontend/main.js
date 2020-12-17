@@ -2,9 +2,6 @@ let List = [];
 
 getNotes();
 
-function addNote() {
-    event.preventDefault();
-    let input = $(".input").val();
 
 
 
@@ -12,16 +9,33 @@ function addNote() {
 async function createNote(e){
     e.preventDefault();
 
-        List.push(note);
-        createNote(note);
-        getNotes();
-        console.log(List);
+    // upload image with FormData
+    let files = document.querySelector('input[type=file]').files;
+    let formData = new FormData();
+
+    for(let file of files) {
+        formData.append('files', file, file.name);
     }
-    //Updatera denna biten!
-    else{
-        alert("Input tom");
+
+    // upload selected files to server
+    let uploadResult = await fetch('/api/file-upload', {
+        method: 'POST',
+        body: formData
+    });
+
+    // get the uploaded image url from response
+    let imageUrl = await uploadResult.text();
+
+    let titleInput = document.querySelector('#title-input');
+    let contentInput = document.querySelector('#notes-input');
+
+    // create a post object containing values from inputs
+    // and the uploaded image url
+    let note = {
+        title: titleInput.value,
+        text: contentInput.value,
+        imageUrl: imageUrl
     }
-    $(".input").val("");
 
     let result = await fetch("/rest/notes", {
         method: "POST",
@@ -35,15 +49,23 @@ async function createNote(e){
     
 }
 
+
+//FUNGERAR
 function renderList() {
     
-    $(".input-list").empty();
+    $("#notes-ul").empty();
     for(let i = 0 ; i< List.length ; i++){
-    $(".input-list").append(`<li> ${List[i].text}<button class="deleteB">X</button></li>`);
+    $("#notes-ul").append(`<li>
+    <h3>${List[i].title}</h3><br>
+    <p>${List[i].text}</p>
+    <embed src="${List[i].imageUrl}" width="200" height="150"><br>
+    <button class="deleteB">X</button>
+    </li><br>`);
     }
     deleteNote();
 }
 
+//FUNGERAR
 function deleteNote(){
 
     let deleteBtns = $(".deleteB");
@@ -57,21 +79,18 @@ function deleteNote(){
     }
 }
 
+
+//FUNGERAR
 async function getNotes(){
     let result = await fetch("/rest/notes");
     List = await result.json();
     renderList();
 }
 
-async function createNote(note){
-    let result = await fetch("/rest/notes",{
-        method: "POST",
-        body: JSON.stringify(note)
-    });
 
-    console.log(await result.text());
-}
 
+
+//FUNGERAR!
 async function deleteNoteDB(note){
     let result = await fetch("/rest/notes/id",{
         method: "DELETE",
