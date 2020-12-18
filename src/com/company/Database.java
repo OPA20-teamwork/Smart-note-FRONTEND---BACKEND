@@ -26,7 +26,7 @@ public class Database {
     }
 
 
-    public List<File> getFiles(){
+/*    public List<File> getFiles(){
         List<File> files = null;
 
         try {
@@ -38,22 +38,12 @@ public class Database {
             throwables.printStackTrace();
         }
         return files;
-    }
+    }*/
 
-    public void createFile(File file){
-        try {
-            PreparedStatement statement = conn.prepareStatement("INSERT INTO files(id, imageUrl) VALUES(?, ?)");
-            statement.setInt(1, file.getId());
-            statement.setString(2, file.getImageUrl());
-            statement.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
 
 
     //FUNGERAR
-    public List<Note> getNotes(){
+    public List<Note>getNotes(){
         List<Note> notes = null;
 
         try {
@@ -65,8 +55,20 @@ public class Database {
             throwables.printStackTrace();
         }
             return notes;
+
     }
 
+
+    public void createFile(File file){
+        try {
+            PreparedStatement statement = conn.prepareStatement("INSERT INTO files(imageUrl, notesID) VALUES(?, ?)");
+            statement.setString(1, file.getImageUrl());
+            statement.setInt(2, Integer.parseInt(getMaxId()));
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 
     //FUNGERAR
     public void createNote(Note note){
@@ -82,10 +84,7 @@ public class Database {
             throwables.printStackTrace();
         }
 
-
     }
-
-
 
 
     //FUNGERAR
@@ -115,6 +114,38 @@ public class Database {
             throwables.printStackTrace();
         }
 
+    }
+
+/*    public List<Note> getMaxId(){
+        List<Note> maxId = null;
+
+        try {
+            PreparedStatement statement = conn.prepareStatement("SELECT MAX(id) FROM notes");
+            ResultSet resultSet = statement.executeQuery();
+            Note[] notesFromResultSet = (Note[])Utils.readResultSetToObject(resultSet, Note[].class);
+            maxId = List.of(notesFromResultSet);
+            System.out.println("max id is: " + maxId);
+        } catch (SQLException | JsonProcessingException throwables) {
+            throwables.printStackTrace();
+        }
+        return maxId;
+    }*/
+
+    public String getMaxId(){
+        String maxId = null;
+        try {
+            PreparedStatement statement = conn.prepareStatement("SELECT MAX(id) FROM notes");
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                maxId = String.valueOf(resultSet.getInt("MAX(id)"));
+                System.out.println("we got that iiiid" + maxId);
+
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return maxId;
     }
 
 

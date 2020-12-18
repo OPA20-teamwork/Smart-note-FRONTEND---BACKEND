@@ -16,19 +16,27 @@ async function createNote(e){
 
     for(let file of files) {
         formData.append('files', file, file.name);
+        imagesToRender.push('/Uploads/' + file.name);
+        console.log(file.name);
     }
 
     // upload selected files to server
-    let uploadResult = await fetch('/api/file-upload', {
-        method: 'POST',
-        body: formData
-    });
+    if(imagesToRender > 0){
+        let uploadResult = await fetch('/api/file-upload', {
+            method: 'POST',
+            body: formData
+        });
+
+    } 
 
     // get the uploaded image url from response
-    imagesToRender.push(await uploadResult.text());
+    //imagesToRender.push(await uploadResult.text());
 
     let titleInput = document.querySelector('#title-input');
     let contentInput = document.querySelector('#notes-input');
+    let fileInput = document.querySelector('#fileInput');
+    //imagesToRender = fileInput.value;
+    console.log(imagesToRender);
 
     // create a post object containing values from inputs
     // and the uploaded image url
@@ -38,10 +46,22 @@ async function createNote(e){
         //imageUrl: imageUrl
     }
 
+
+
     let result = await fetch("/rest/notes", {
         method: "POST",
         body: JSON.stringify(note)
     });
+
+    for(let i = 0; i < imagesToRender.length; i++){
+        let userInput = {
+            imageUrl: imagesToRender[i]
+        }
+    let result1 = await fetch("/rest/files", {
+        method: "POST",
+        body: JSON.stringify(userInput)
+    });
+}
 
     console.log("funkar du", note);
     List.push(note);
@@ -69,7 +89,7 @@ async function createNote(e){
 
 
 function renderList() {
-    
+
     $("#notes-ul").empty();
     for(let i = 0 ; i < List.length ; i++){
         let string = `<div class="fullNote">

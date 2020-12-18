@@ -13,9 +13,9 @@
     </header>
 <h2>Här samlar vi allt viktigt och oviktigt</h2>
     <form method="POST" enctype="multipart/form-data" onsubmit="createNote(event)">
-        <input type="text" placeholder="Titel...." class="input" id="title-input" >
-        <textarea id="notes-input" required placeholder="content" cols="30" rows="10" class="input"></textarea>
-        <input type="file" multiple="multiple" placeholder="Välj din bild...">
+        <div><input type="text" placeholder="Titel...." class="input" id="title-input" > 
+        <div><textarea id="notes-input" required placeholder="Skriv din anteckning här..."rows="7" class="input"></textarea>
+        <input id="fileInput" type="file" multiple="multiple" placeholder="Välj din bild...">
         <!-- <input type="file" accept="image/*" placeholder="Välj din bild..."> -->
         <button class="input-button"  id="notes-submitBtn" type="submit">
         

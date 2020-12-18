@@ -8,6 +8,11 @@ public class File {
     public File() {
     }
 
+    public File(String imageUrl, int notesID) {
+        this.imageUrl = imageUrl;
+        this.notesID = notesID;
+    }
+
     public File(int id, String imageUrl) {
         this.id = id;
         this.imageUrl = imageUrl;
