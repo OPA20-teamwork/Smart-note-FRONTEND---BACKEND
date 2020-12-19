@@ -25,8 +25,7 @@ public class Database {
 
     }
 
-
-/*    public List<File> getFiles(){
+    public List<File> getFiles(){
         List<File> files = null;
 
         try {
@@ -37,10 +36,10 @@ public class Database {
         } catch (SQLException | JsonProcessingException throwables) {
             throwables.printStackTrace();
         }
+
+        System.out.println("fungerar utskriften av files?: " + files);
         return files;
-    }*/
-
-
+    }
 
     //FUNGERAR
     public List<Note>getNotes(){
@@ -58,7 +57,6 @@ public class Database {
 
     }
 
-
     public void createFile(File file){
         try {
             PreparedStatement statement = conn.prepareStatement("INSERT INTO files(imageUrl, notesID) VALUES(?, ?)");
@@ -74,18 +72,16 @@ public class Database {
     public void createNote(Note note){
 
         try {
-            PreparedStatement statement = conn.prepareStatement("INSERT INTO notes (text, date, imageUrl, title) VALUES(?, ?, ?, ?)");
+            PreparedStatement statement = conn.prepareStatement("INSERT INTO notes (text, date, title) VALUES(?, ?, ?)");
             statement.setString(1, note.getText());
             statement.setInt(2, note.getDate());
-            statement.setString(3, note.getImageUrl());
-            statement.setString(4, note.getTitle());
+            statement.setString(3, note.getTitle());
             statement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
     }
-
 
     //FUNGERAR
     public void deleteNote(Note note){
@@ -98,16 +94,14 @@ public class Database {
         }
     }
 
-
     //FUNGERAR
     public void updateNoteById(Note note){
         try {
-            PreparedStatement statement = conn.prepareStatement("UPDATE notes SET text = ?, date = ?, imageUrl = ?, title = ? WHERE id = ?");
+            PreparedStatement statement = conn.prepareStatement("UPDATE notes SET text = ?, date = ?, title = ? WHERE id = ?");
             statement.setString(1, note.getText());
             statement.setInt(2, note.getDate());
-            statement.setString(3, note.getImageUrl());
-            statement.setString(4, note.getTitle());
-            statement.setInt(5, note.getId());
+            statement.setString(3, note.getTitle());
+            statement.setInt(4, note.getId());
 
             statement.executeUpdate();
         } catch (SQLException throwables) {
@@ -115,21 +109,6 @@ public class Database {
         }
 
     }
-
-/*    public List<Note> getMaxId(){
-        List<Note> maxId = null;
-
-        try {
-            PreparedStatement statement = conn.prepareStatement("SELECT MAX(id) FROM notes");
-            ResultSet resultSet = statement.executeQuery();
-            Note[] notesFromResultSet = (Note[])Utils.readResultSetToObject(resultSet, Note[].class);
-            maxId = List.of(notesFromResultSet);
-            System.out.println("max id is: " + maxId);
-        } catch (SQLException | JsonProcessingException throwables) {
-            throwables.printStackTrace();
-        }
-        return maxId;
-    }*/
 
     public String getMaxId(){
         String maxId = null;
@@ -162,8 +141,6 @@ public class Database {
         }
     return imageUrl;
     }
-
-
 
     public String uploadFile(FileItem file){
         String imageUrl =  "/Uploads/" + file.getName();

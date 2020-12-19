@@ -1,14 +1,22 @@
 let List = [];
 let imagesToRender = [];
+let filesToRender = [];
 
 getNotes();
+getFiles();
 
 
+function addFilesandNotes(e){
+    e.preventDefault();
+    createNote();
+    getNotes();
+    getFiles();
 
+}
 
 //FUNGERAR
-async function createNote(e){
-    e.preventDefault();
+async function createNote(){
+    //e.preventDefault();
 
     // upload image with FormData
     let files = document.querySelector('input[type=file]').files;
@@ -30,12 +38,10 @@ async function createNote(e){
     } 
 
     // get the uploaded image url from response
-    //imagesToRender.push(await uploadResult.text());
 
     let titleInput = document.querySelector('#title-input');
     let contentInput = document.querySelector('#notes-input');
     let fileInput = document.querySelector('#fileInput');
-    //imagesToRender = fileInput.value;
     console.log(imagesToRender);
 
     // create a post object containing values from inputs
@@ -43,7 +49,7 @@ async function createNote(e){
     let note = {
         title: titleInput.value,
         text: contentInput.value,
-        //imageUrl: imageUrl
+
     }
 
 
@@ -60,33 +66,18 @@ async function createNote(e){
     let result1 = await fetch("/rest/files", {
         method: "POST",
         body: JSON.stringify(userInput)
+        
     });
+
+    filesToRender.push(userInput);
 }
 
+    imagesToRender.splice(0, imagesToRender.length);
     console.log("funkar du", note);
     List.push(note);
     renderList();
 
-    
 }
-
-
-//FUNGERAR
-// function renderList() {
-    
-//     $("#notes-ul").empty();
-//     for(let i = 0 ; i< List.length ; i++){
-//     $("#notes-ul").append(`<div>
-//     <li>
-//     <h3>${List[i].title}</h3><br>
-//     <p>${List[i].text}</p>
-//     <embed src="${List[i].imageUrl}" width="200" height="150"><br>
-//     <button class="deleteB">X</button>
-//     </li></div><br>`);
-//     }
-//     deleteNote();
-// }
-
 
 function renderList() {
 
@@ -96,8 +87,10 @@ function renderList() {
     <h3>${List[i].title}</h3><br>
     <p>${List[i].text}</p>`;
 
-    for(let j = 0; j < imagesToRender.length; j++){
-    string += `<embed src="${imagesToRender[j]}" width="200" height="150"><br>`;
+    for(let j = 0; j < filesToRender.length; j++){
+    if(filesToRender[j].notesID == List[i].id){
+        string += `<embed src="${filesToRender[j].imageUrl}" width="200" height="150"><br>`;
+    }
     }
     string +=
     `<button class="deleteB">X</button>
@@ -105,6 +98,7 @@ function renderList() {
     $("#notes-ul").append(string);
     }
     deleteNote();
+
 }
 
 //FUNGERAR
@@ -117,6 +111,7 @@ function deleteNote(){
             List.splice(i,1);
             $(this).parent().remove();
             getNotes();
+            getFiles();
         })
     }
 }
@@ -129,8 +124,11 @@ async function getNotes(){
     renderList();
 }
 
-
-
+async function getFiles(){
+    let result = await fetch("/rest/files");
+    filesToRender = await result.json();
+    renderList();
+}
 
 //FUNGERAR!
 async function deleteNoteDB(note){

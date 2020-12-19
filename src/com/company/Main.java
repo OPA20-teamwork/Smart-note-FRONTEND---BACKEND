@@ -21,17 +21,13 @@ public class Main {
 	    app.get("/rest/notes", (request, response) -> {
             List<Note> notes = db.getNotes();
             response.json(notes);
-
-
         });
 
         //FUNGERAR
-/*	    app.get("/rest/files", (request, response) -> {
+	    app.get("/rest/files", (request, response) -> {
             List<File> files = db.getFiles();
             response.json(files);
-        });*/
-
-
+        });
 
 	    app.post("/api/file-upload", (request, response) -> {
 	        String imageUrl = null;
@@ -54,8 +50,6 @@ public class Main {
             }
         });
 
-
-	    //Updaatera följande så att det ser mer ut som Johans POST, Se dock till att den kan hantera felr filer inom samma post
         //FUNGERAR
         app.post("/rest/notes", (request, response) -> {
             Note note = (Note)request.getBody(Note.class);
@@ -98,8 +92,6 @@ public class Main {
         //Listen for requests
         app.listen(7000);
         System.out.println("Server started on port: " + 7000);
-
-
 
     }
 }
