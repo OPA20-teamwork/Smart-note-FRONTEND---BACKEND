@@ -9,8 +9,8 @@ getFiles();
 function addFilesandNotes(e){
     e.preventDefault();
     createNote();
-    getNotes();
-    getFiles();
+    //getNotes();
+    //getFiles();
 
 }
 
@@ -75,7 +75,8 @@ async function createNote(){
     imagesToRender.splice(0, imagesToRender.length);
     console.log("funkar du", note);
     List.push(note);
-    renderList();
+    location.reload(true);
+    //renderList();
 
 }
 
@@ -85,7 +86,7 @@ function renderList() {
     for(let i = 0 ; i < List.length ; i++){
         let string = `<div class="fullNote">
     <h3>${List[i].title}</h3><br>
-    <p>${List[i].text}</p>`;
+    <textarea class="updateTextArea">${List[i].text}</textarea>`;
 
     for(let j = 0; j < filesToRender.length; j++){
     if(filesToRender[j].notesID == List[i].id){
@@ -93,7 +94,8 @@ function renderList() {
     }
     }
     string +=
-    `<button class="deleteB">X</button>
+    `<button class="updateB">Update</button>
+     <button class="deleteB">X</button>
     </div>`;
     $("#notes-ul").append(string);
     }
@@ -112,6 +114,17 @@ function deleteNote(){
             $(this).parent().remove();
             getNotes();
             getFiles();
+        })
+    }
+}
+
+function updateNote(){
+    let updateBtns = $(".updateB");
+    for(let i = 0; i < updateBtns.length; i++){
+        $(updateBtns[i]).click(function(){
+            let updatedText = this.document.getElementsByClassName("updateTextArea").value();
+            List[i].text = updatedText;
+            updateNoteDB(List[i]);
         })
     }
 }
@@ -138,4 +151,31 @@ async function deleteNoteDB(note){
     })
     
     console.log(await result.text());
+}
+
+
+async function updateNoteDB(note){
+    let result = await fetch("/rest/notes/id", {
+        method: "PUT",
+        body: JSON.stringify(note)
+    })
+
+    console.log(await result.text());
+}
+
+
+
+//sök function
+function search(userInput) {
+    let allItems = $('.fullNote');
+   
+   for(let item of allItems) {
+         let h3 = $(item).find('h3').text();
+   
+        if (h3.includes(userInput)) {
+        $(item).show();
+        }else {
+        $(item).hide();
+     }
+    }
 }

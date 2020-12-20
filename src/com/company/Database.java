@@ -72,10 +72,9 @@ public class Database {
     public void createNote(Note note){
 
         try {
-            PreparedStatement statement = conn.prepareStatement("INSERT INTO notes (text, date, title) VALUES(?, ?, ?)");
+            PreparedStatement statement = conn.prepareStatement("INSERT INTO notes (text, title) VALUES(?, ?)");
             statement.setString(1, note.getText());
-            statement.setInt(2, note.getDate());
-            statement.setString(3, note.getTitle());
+            statement.setString(2, note.getTitle());
             statement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -97,11 +96,10 @@ public class Database {
     //FUNGERAR
     public void updateNoteById(Note note){
         try {
-            PreparedStatement statement = conn.prepareStatement("UPDATE notes SET text = ?, date = ?, title = ? WHERE id = ?");
+            PreparedStatement statement = conn.prepareStatement("UPDATE notes SET text = ?, title = ? WHERE id = ?");
             statement.setString(1, note.getText());
-            statement.setInt(2, note.getDate());
-            statement.setString(3, note.getTitle());
-            statement.setInt(4, note.getId());
+            statement.setString(2, note.getTitle());
+            statement.setInt(3, note.getId());
 
             statement.executeUpdate();
         } catch (SQLException throwables) {

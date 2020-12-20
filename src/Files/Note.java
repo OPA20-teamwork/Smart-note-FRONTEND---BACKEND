@@ -5,7 +5,6 @@ import java.util.List;
 public class Note {
     private int id;
     private String text;
-    private int date;
     private String title;
 
     public Note() {
@@ -14,9 +13,8 @@ public class Note {
 
 
 
-    public Note(String text, int date, String title) {
+    public Note(String text, String title) {
         this.text = text;
-        this.date = date;
         this.title = title;
     }
 
@@ -37,15 +35,6 @@ public class Note {
         this.text = text;
     }
 
-    public int getDate() {
-        return date;
-    }
-
-    public void setDate(int date) {
-        this.date = date;
-    }
-
-
     public String getTitle() {
         return title;
     }
@@ -60,7 +49,6 @@ public class Note {
         return "Note{" +
                 "id=" + id +
                 ", text='" + text + '\'' +
-                ", date=" + date +
                 ", title='" + title + '\'' +
                 '}';
     }
