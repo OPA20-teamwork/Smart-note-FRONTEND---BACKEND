@@ -80,13 +80,14 @@ async function createNote(){
 
 }
 
+
 function renderList() {
 
     $("#notes-ul").empty();
     for(let i = 0 ; i < List.length ; i++){
-        let string = `<div class="fullNote">
-    <h3>${List[i].title}</h3><br>
-    <textarea class="updateTextArea">${List[i].text}</textarea>`;
+        let string = `<div class="fullNote" id="fullNoteDiv">
+    <h3 id="noteTitle">${List[i].title}</h3><br>
+    <textarea rows="5" cols="1" class="updateTextArea">${List[i].text}</textarea>`;
 
     for(let j = 0; j < filesToRender.length; j++){
     if(filesToRender[j].notesID == List[i].id){
@@ -94,7 +95,7 @@ function renderList() {
     }
     }
     string +=
-    `<button type="button" class="updateB">Edit</button>
+    `<button type="button" class="updateB">Update</button>
      <button class="deleteB">X</button>
     </div>`;
     $("#notes-ul").append(string);

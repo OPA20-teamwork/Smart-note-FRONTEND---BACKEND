@@ -135,7 +135,7 @@ public class Database {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
                 maxId = String.valueOf(resultSet.getInt("MAX(id)"));
-                System.out.println("we got that iiiid" + maxId);
+                System.out.println("Testar funktionalitet " + maxId);
 
             }
         } catch (SQLException throwables) {
