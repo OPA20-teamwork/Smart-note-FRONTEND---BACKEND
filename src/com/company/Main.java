@@ -74,6 +74,13 @@ public class Main {
             response.send("delete Ok");
         });
 
+	    app.delete("/rest/files/:id", (request, response) -> {
+            File file = (File) request.getBody(File.class);
+            db.deleteFileDB(file);
+            System.out.println(file.toString() + "deleted");
+            response.send("delete Ok");
+        });
+
         //FUNGERAR(trots att vi ej prövat ännu) se till att prova före än inlämning!!!
 	    app.put("/rest/notes/:id", (request, response) -> {
 	        Note note = (Note) request.getBody(Note.class);

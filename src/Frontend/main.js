@@ -90,7 +90,7 @@ function renderList() {
 
     for(let j = 0; j < filesToRender.length; j++){
     if(filesToRender[j].notesID == List[i].id){
-        string += `<embed src="${filesToRender[j].imageUrl}" width="400" height="300"><br>`;
+        string += `<embed src="${filesToRender[j].imageUrl}" width="400" height="300"> <button type="button" class="deleteFileB">X</button><br>`;
     }
     }
     string +=
@@ -101,6 +101,7 @@ function renderList() {
     }
     deleteNote();
     updateNote();
+    deleteFileB();
 
 }
 
@@ -113,6 +114,19 @@ function deleteNote(){
             deleteNoteDB(List[i]);
             List.splice(i,1);
             $(this).parent().remove();
+            getNotes();
+            getFiles();
+        })
+    }
+}
+
+function deleteFileB(){
+
+    let deleteFileB = $(".deleteFileB");
+    for(let i = 0 ;  i < deleteFileB.length ; i++){
+        $(deleteFileB[i]).click(function(){
+            deleteFileDB(filesToRender[i]);
+            filesToRender.splice(i,1);
             getNotes();
             getFiles();
         })
@@ -151,6 +165,15 @@ async function deleteNoteDB(note){
         body: JSON.stringify(note)
     })
     
+    console.log(await result.text());
+}
+
+async function deleteFileDB(file){
+    let result = await fetch("/rest/files/id", {
+        method: "DELETE",
+        body: JSON.stringify(file)
+    })
+
     console.log(await result.text());
 }
 
