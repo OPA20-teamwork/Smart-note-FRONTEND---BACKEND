@@ -91,12 +91,12 @@ function renderList() {
 
     for(let j = 0; j < filesToRender.length; j++){
     if(filesToRender[j].notesID == List[i].id){
-        string += `<embed src="${filesToRender[j].imageUrl}" width="400" height="300"> <button type="button" class="deleteFileB">X</button><br>`;
+        string += `<embed id="img" src="${filesToRender[j].imageUrl}" width="400" height="300"> <button type="button" class="deleteFileB">X</button><br>`;
     }
     }
     string +=
     `<button type="button" class="updateB">Update</button>
-     <button class="deleteB">X</button>
+     <button class="deleteB">Delete</button>
     </div>`;
     $("#notes-ul").append(string);
     }

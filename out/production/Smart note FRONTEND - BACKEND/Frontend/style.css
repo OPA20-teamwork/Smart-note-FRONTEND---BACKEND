@@ -2,9 +2,14 @@
     * {
       box-sizing: border-box;
     }
+
+
     
-  body {background:url(https://image.freepik.com/free-photo/workplace-with-smartphone-laptop-black-table-top-view-copyspace-background_144627-24860.jpg);
-    background-size: cover;
+   body {
+    
+   background-color: rgb(46, 45, 45)
+
+   /*{background:url(https://image.freepik.com/free-photo/workplace-with-smartphone-laptop-black-table-top-view-copyspace-background_144627-24860.jpg); */
   }
 
   #search{
@@ -15,26 +20,29 @@
 }
 
 header a{
+    display: flex;
+    justify-self: center;
     text-decoration: none;
     color: burlywood;
     font-size: x-large;
-    margin-left: 8%;
+    margin-left: 650px;
 }
+
+
 
 h2{
-    display: flex;
-    justify-content: center;
+    text-align: center;
+    color: burlywood;
 }
 
-  header, form{
+form{
     display: flex;
     justify-content: center;
     font-size: 25;
+  
 }
 
-#inputFields{
-    margin-left: 23%;
-}
+
 
   #fileInput{
       background-color: rgb(255, 255, 255);
@@ -50,20 +58,20 @@ h2{
     border-style: solid;
     margin: 1%;
     font-size: 16px;
-
-
 }
 
-  h3{
-      color: lightgray;
-      font-size: 25px;
-      display: inline;
+
+
+  #noteTitle{
+      color: rgb(184, 146, 96);
+      font-size: 30px;
       text-align: center;
-      padding-left: 160px;
   }
 
+
+
   .updateTextArea{
-    background: transparent;
+      background-color: rgba(60, 60, 61, 0.651);
     color: lightgray;
     resize: none;
     border: 0 none;
@@ -73,7 +81,11 @@ h2{
     height: 100%;
     position: relative;
     display: inline-block;
+    margin-bottom: 25px;
+  }
 
+  .updateTextArea:hover{
+    background-color: rgba(0, 0, 0, 0.514);;
   }
 
   .input{
@@ -83,24 +95,35 @@ h2{
     width: 45ch;
 }
 
+#notes-ul{
+ 
+  margin-left: 450px;
+}
+
+
+
 .fullNote{
     border: solid black 2px;
     background-color: rgba(0, 0, 0, 0.199);
-    margin-right: 32%;
-    padding-left: 50px;
-    border-left: 0px;
+
     border-radius: 10px;
     margin: 15px 0 15px 0;
     padding: 25px 25px 25px 25px;
+    display: inline-block;
+    align-content: center;
 }
 
-.fullNote:hover{
-    background-color: rgba(0, 0, 0, 0.514);;
+#img{
+  padding-left: 50px;
+  transition-timing-function: linear;
 }
 
-
-
-
+#img:hover{
+  transform: scale(1.3);
+  transition: 0.6s;
+  
+ 
+}
 
 
   /* Ändrar knapparna på startsidan */
@@ -118,13 +141,67 @@ h2{
 }
 
 /*Ändrar delete knappen på uppladdade filer*/
-.deleteB{
-    color: teal;
+button{
+    color: rgb(167, 129, 80);
     background: white;
     cursor: pointer;
     transition: all 0.3s ease;
 }
-.deleteB:hover{
-    background: teal;
+button:hover{
+    background: burlywood;
     color: white;
 }
+
+.deleteFileB{
+    position:relative; left:-35px; top:-280px;
+}
+
+.deleteB{
+  float: right;
+  
+}
+
+.updateB{
+  float: right;
+  margin-right: 60px;
+}
+
+#indexH1{
+  text-align: center;
+  color: burlywood;
+}
+
+.column{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: left;
+  width: 33.33%;
+}
+
+.index-btns{
+  background-color:rgb(222, 184, 135);
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  display: inline-block;
+  font-size: 20px;
+}
+
+.index-btns:hover{
+  background-color: rgba(222, 184, 135, 0.548);
+}
+
+.start-page-list{
+  position: fixed;
+  margin-top: 20%;
+  border-width: 30%;
+  transition-timing-function: linear;
+  text-align: center;
+  font-size: 30px;
+}
+
+a{
+  text-decoration: none;
+}
+

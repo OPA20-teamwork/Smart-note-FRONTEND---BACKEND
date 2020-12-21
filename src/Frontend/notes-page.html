@@ -7,24 +7,25 @@
     <link rel="stylesheet" href="style.css">
     <title>Smart Notes</title>
 </head>
+<div id="pageContainer">
 <body>
     <input placeholder="Sök" id="search" onkeyup=search(this.value)></input>
     <header>
         <a href="index.html"><h1>Smart Notes</h1></a>
         
-    </header>
-<h2>Här samlar vi allt viktigt och oviktigt</h2>
-    <form id="inputFields" method="POST" enctype="multipart/form-data" onsubmit="addFilesandNotes(event)">
-        <div><input type="text" placeholder="Titel...." class="input" id="title-input" > 
-        <div><textarea id="notes-input" placeholder="Skriv din anteckning här..."rows="7" class="input"></textarea>
-        <div><input id="fileInput" type="file" multiple="multiple" placeholder="Välj din bild...">
-        <!-- <input type="file" accept="image/*" placeholder="Välj din bild..."> -->
-        <button class="input-button"  id="notes-submitBtn" type="submit">
-        
-            <i>+</i>
-        </button>
-        
-    </form>
+        <h2>Här samlar vi allt viktigt och oviktigt</h2>
+        <form id="inputFields" method="POST" enctype="multipart/form-data" onsubmit="addFilesandNotes(event)">
+            <div><input type="text" placeholder="Titel...." class="input" id="title-input" > 
+                <div><textarea id="notes-input" placeholder="Skriv din anteckning här..."rows="7" class="input"></textarea>
+                    <div><input id="fileInput" type="file" multiple="multiple" placeholder="Välj din bild...">
+                        <!-- <input type="file" accept="image/*" placeholder="Välj din bild..."> -->
+                        <button class="input-button"  id="notes-submitBtn" type="submit">
+                            
+                            <i>+</i>
+                        </button>
+                        
+                    </form>
+                </header>
     
         <!-- Lägg till id för varje ul lista i varje page, just nu skrivs noteringarna ut i alla sidor. därför behöver vi ändra id och se till att varje upladdning fil/bild/notering hamnar där den ska vara-->
     <ul class="input-list" id="notes-ul">
@@ -34,5 +35,6 @@
 
 
     <script src="/main.js"></script>
+</div>
 </body>
 </html>
