@@ -29,7 +29,7 @@ async function createNote(){
     }
 
     // upload selected files to server
-    if(imagesToRender > 0){
+    if(imagesToRender.length > 0){
         let uploadResult = await fetch('/api/file-upload', {
             method: 'POST',
             body: formData
@@ -90,16 +90,17 @@ function renderList() {
 
     for(let j = 0; j < filesToRender.length; j++){
     if(filesToRender[j].notesID == List[i].id){
-        string += `<embed src="${filesToRender[j].imageUrl}" width="200" height="150"><br>`;
+        string += `<embed src="${filesToRender[j].imageUrl}" width="400" height="300"><br>`;
     }
     }
     string +=
-    `<button class="updateB">Update</button>
+    `<button type="button" class="updateB">Edit</button>
      <button class="deleteB">X</button>
     </div>`;
     $("#notes-ul").append(string);
     }
     deleteNote();
+    updateNote();
 
 }
 
@@ -122,10 +123,10 @@ function updateNote(){
     let updateBtns = $(".updateB");
     for(let i = 0; i < updateBtns.length; i++){
         $(updateBtns[i]).click(function(){
-            let updatedText = this.document.getElementsByClassName("updateTextArea").value();
+            let updatedText = $('.updateTextArea').val();
             List[i].text = updatedText;
             updateNoteDB(List[i]);
-        })
+        });
     }
 }
 
