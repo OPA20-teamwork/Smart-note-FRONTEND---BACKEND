@@ -93,6 +93,16 @@ public class Database {
         }
     }
 
+    public void deleteFile(Note note){
+        try {
+            PreparedStatement statement = conn.prepareStatement("DELETE FROM files WHERE notesID = ?");
+            statement.setInt(1, note.getId());
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
     //FUNGERAR
     public void updateNoteById(Note note){
         try {

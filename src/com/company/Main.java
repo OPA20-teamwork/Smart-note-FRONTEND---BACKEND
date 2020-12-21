@@ -69,6 +69,7 @@ public class Main {
 	    app.delete("/rest/notes/:id", (request, response) -> {
 	        Note note = (Note)request.getBody(Note.class);
 	        db.deleteNote(note);
+	        db.deleteFile(note);
             System.out.println(note.toString() + "deleted");
             response.send("delete Ok");
         });
