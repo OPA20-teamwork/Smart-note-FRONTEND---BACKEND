@@ -36,8 +36,6 @@ public class Database {
         } catch (SQLException | JsonProcessingException throwables) {
             throwables.printStackTrace();
         }
-
-        System.out.println("fungerar utskriften av files?: " + files);
         return files;
     }
 
@@ -135,8 +133,6 @@ public class Database {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
                 maxId = String.valueOf(resultSet.getInt("MAX(id)"));
-                System.out.println("Testar funktionalitet " + maxId);
-
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

@@ -5,19 +5,15 @@ let filesToRender = [];
 getNotes();
 getFiles();
 
-
 function addFilesandNotes(e){
     e.preventDefault();
     createNote();
-    //getNotes();
-    //getFiles();
+
 
 }
 
 //FUNGERAR
 async function createNote(){
-    //e.preventDefault();
-
     // upload image with FormData
     let files = document.querySelector('input[type=file]').files;
     let formData = new FormData();
@@ -52,8 +48,6 @@ async function createNote(){
 
     }
 
-
-
     let result = await fetch("/rest/notes", {
         method: "POST",
         body: JSON.stringify(note)
@@ -76,26 +70,28 @@ async function createNote(){
     console.log("funkar du", note);
     List.push(note);
     location.reload(true);
-    //renderList();
 
 }
 
-
 function renderList() {
+
 
     $("#notes-ul").empty();
     for(let i = 0 ; i < List.length ; i++){
-        let string = `<div class="fullNote" id="fullNoteDiv">
-    <h3 id="noteTitle">${List[i].title}</h3><br>
-    <textarea rows="5" cols="1" class="updateTextArea">${List[i].text}</textarea>`;
+        let string = 
+        /*html*/`<div class="fullNote" id="fullNoteDiv">
+        <h3 id="noteTitle">${List[i].title}</h3><br>
+        <textarea rows="5" cols="1" class="updateTextArea">${List[i].text}</textarea>`;
 
     for(let j = 0; j < filesToRender.length; j++){
     if(filesToRender[j].notesID == List[i].id){
-        string += `<embed id="img" src="${filesToRender[j].imageUrl}" width="400" height="300"> <button type="button" class="deleteFileB">X</button><br>`;
+        string += 
+        /*html*/`<embed id="img" src="${filesToRender[j].imageUrl}" width="400" height="300"> 
+        <button type="button" class="deleteFileB">X</button><br>`;
     }
     }
     string +=
-    `<button type="button" class="updateB">Update</button>
+    /*html*/`<button type="button" class="updateB">Update</button>
      <button class="deleteB">Delete</button>
     </div>`;
     $("#notes-ul").append(string);
@@ -103,6 +99,8 @@ function renderList() {
     deleteNote();
     updateNote();
     deleteFileB();
+
+
 
 }
 
@@ -112,13 +110,17 @@ function deleteNote(){
     let deleteBtns = $(".deleteB");
     for(let i = 0 ;  i < deleteBtns.length ; i++){
         $(deleteBtns[i]).click(function(){
-            deleteNoteDB(List[i]);
-            List.splice(i,1);
-            $(this).parent().remove();
-            getNotes();
-            getFiles();
-        })
+      if(confirm("Vill du radera hela noten?")){
+          deleteNoteDB(List[i]);
+          List.splice(i,1);
+          $(this).parent().remove();
+          getNotes();
+          getFiles();
+
+        }
+    })
     }
+
 }
 
 function deleteFileB(){
@@ -126,10 +128,13 @@ function deleteFileB(){
     let deleteFileB = $(".deleteFileB");
     for(let i = 0 ;  i < deleteFileB.length ; i++){
         $(deleteFileB[i]).click(function(){
-            deleteFileDB(filesToRender[i]);
-            filesToRender.splice(i,1);
-            getNotes();
-            getFiles();
+          if(confirm("Vill du verkligen radera mig....")){
+              deleteFileDB(filesToRender[i]);
+              filesToRender.splice(i,1);
+              getNotes();
+              getFiles();
+
+          }
         })
     }
 }

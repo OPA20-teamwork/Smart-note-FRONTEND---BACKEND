@@ -3,13 +3,10 @@
       box-sizing: border-box;
     }
 
+    body {
+      
+      background-color: rgb(73, 71, 71);
 
-    
-   body {
-    
-   background-color: rgb(46, 45, 45)
-
-   /*{background:url(https://image.freepik.com/free-photo/workplace-with-smartphone-laptop-black-table-top-view-copyspace-background_144627-24860.jpg); */
   }
 
   #search{
@@ -19,13 +16,18 @@
       margin-right: 4%;
 }
 
+header{
+  background:url(https://image.freepik.com/free-photo/dark-grunge-texture_1048-4055.jpg?1);
+  background-size: cover;
+}
+
 header a{
     display: flex;
     justify-self: center;
     text-decoration: none;
     color: burlywood;
     font-size: x-large;
-    margin-left: 650px;
+    margin-left: 600px;
 }
 
 
@@ -41,12 +43,10 @@ form{
     font-size: 25;
   
 }
-
-
-
   #fileInput{
       background-color: rgb(255, 255, 255);
       margin-top: 10px;
+      margin-bottom: 20px;
   }
 
   form input, form textarea{
@@ -60,15 +60,11 @@ form{
     font-size: 16px;
 }
 
-
-
   #noteTitle{
       color: rgb(184, 146, 96);
       font-size: 30px;
       text-align: center;
   }
-
-
 
   .updateTextArea{
       background-color: rgba(60, 60, 61, 0.651);
@@ -100,8 +96,6 @@ form{
   margin-left: 450px;
 }
 
-
-
 .fullNote{
     border: solid black 2px;
     background-color: rgba(0, 0, 0, 0.199);
@@ -119,13 +113,9 @@ form{
 }
 
 #img:hover{
-  transform: scale(1.3);
-  transition: 0.6s;
-  
- 
+  transform: scale(1.1);
+  transition: 0.6s; 
 }
-
-
   /* Ändrar knapparna på startsidan */
 .main-btns{
     background-color:teal;
@@ -140,7 +130,6 @@ form{
     background-color: rgb(2, 85, 85);
 }
 
-/*Ändrar delete knappen på uppladdade filer*/
 button{
     color: rgb(167, 129, 80);
     background: white;
@@ -158,12 +147,14 @@ button:hover{
 
 .deleteB{
   float: right;
+  margin-top: 15px;
   
 }
 
 .updateB{
   float: right;
   margin-right: 60px;
+  margin-top: 15px;
 }
 
 #indexH1{

@@ -41,8 +41,6 @@ public class Main {
                     System.out.println("bild nr: " + i + imageUrl);
 
                     response.send(imageUrl);
-
-                    System.out.println("kommer du fram eller?");
                 }
             }catch (Exception e){
 	            e.printStackTrace();

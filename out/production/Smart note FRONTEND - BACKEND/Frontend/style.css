@@ -3,11 +3,12 @@
       box-sizing: border-box;
     }
 
+    
+    
+    body {
+      
+      background-color: rgb(73, 71, 71);
 
-    
-   body {
-    
-   background-color: rgb(46, 45, 45)
 
    /*{background:url(https://image.freepik.com/free-photo/workplace-with-smartphone-laptop-black-table-top-view-copyspace-background_144627-24860.jpg); */
   }
@@ -19,13 +20,18 @@
       margin-right: 4%;
 }
 
+header{
+  background:url(https://image.freepik.com/free-photo/dark-grunge-texture_1048-4055.jpg?1);
+  background-size: cover;
+}
+
 header a{
     display: flex;
     justify-self: center;
     text-decoration: none;
     color: burlywood;
     font-size: x-large;
-    margin-left: 650px;
+    margin-left: 600px;
 }
 
 
@@ -47,6 +53,7 @@ form{
   #fileInput{
       background-color: rgb(255, 255, 255);
       margin-top: 10px;
+      margin-bottom: 20px;
   }
 
   form input, form textarea{
